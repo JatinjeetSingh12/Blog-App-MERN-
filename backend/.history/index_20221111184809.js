@@ -1,0 +1,21 @@
+const express = require('express')
+var cors = require('cors')
+const mongoconnect = require('./db')
+
+const app = express()
+
+ 
+app.use(cors())
+
+const port = 5000
+
+app.use(express.json())
+
+mongoconnect();
+
+app.use('/auth',require('./routes/User'));
+app.use('/blog',require('./routes/Blog'));
+
+app.listen(port, () => {
+  console.log(`blog app listening on port http://localhost:${port}`)
+})
